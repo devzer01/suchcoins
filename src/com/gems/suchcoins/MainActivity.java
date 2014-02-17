@@ -1,5 +1,8 @@
 package com.gems.suchcoins;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,6 +20,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.widget.TextView;
 
 
 
@@ -30,23 +34,31 @@ public class MainActivity extends SherlockActivity {
 	
 	public String poolUrl; 
 	
+	protected Map<String, String> dataMap;
+	
+	protected TextView username;
 
-	SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+	SharedPreferences settings;
 	 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		settings = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+		
+		username = (TextView)findViewById(R.id.textUsername);
+		
 		String apiKey = settings.getString("apiKey", null);
 		
-		if (apiKey.equals(null)) {
-			apiKey = "SCAN QR CODE TO ENTER API KEY";
+		if (apiKey == null) {
+			apiKey = "c5e1a17eeb9b41840b2177dbed85c79e0d9e6eabc7a65627ec118ee1b0bc5785";
 		}
 		
 		poolUrl = POOL_URL + apiKey;
 		//check if apiKey is set first
 		new ProgressTask(MainActivity.this).execute();
+		
 	}
 
 	@Override
@@ -116,6 +128,8 @@ public class MainActivity extends SherlockActivity {
 	            if (dialog.isShowing()) {
 	                dialog.dismiss();
 	            }
+	            
+	            username.setText(dataMap.get("username"));
 	        }
 	 
 	        protected Boolean doInBackground(final String... args) {
@@ -123,19 +137,20 @@ public class MainActivity extends SherlockActivity {
 	            JSONParser jParser = new JSONParser();
 	 
 	            // get JSON data from URL
-	            JSONArray json = jParser.getJSONFromUrl(poolUrl);
+	            JSONObject json = jParser.getJSONFromUrl(poolUrl);
+	            
+	            dataMap = new HashMap();
+	            
+	            try {
+					JSONObject data = json.getJSONObject("getuserstatus").getJSONObject("data");
+					dataMap.put("username", data.getString("username"));
+					
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	 
-	            for (int i = 0; i < json.length(); i++) {
-	 
-	                try {
-	                    JSONObject c = json.getJSONObject(i);
-	                    String vtype = c.getString("test");
-	                }
-	                catch (JSONException e) {
-	                    e.printStackTrace();
-	                }
-	            }
-	            return null;
+	            return true;
 	        }
 	    }
 }

@@ -14,19 +14,20 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
  
 import android.util.Log;
  
 public class JSONParser {
  
     static InputStream iStream = null;
-    static JSONArray jarray = null;
+    static JSONObject jarray = null;
     static String json = "";
  
     public JSONParser() {
     }
  
-    public JSONArray getJSONFromUrl(String url) {
+    public JSONObject getJSONFromUrl(String url) {
  
            StringBuilder builder = new StringBuilder();
             HttpClient client = new DefaultHttpClient();
@@ -54,13 +55,12 @@ public class JSONParser {
            
         // Parse String to JSON object
         try {
-            jarray = new JSONArray( builder.toString());
+            jarray = new JSONObject(builder.toString());
+            Log.d("json", builder.toString());
         } catch (JSONException e) {
             Log.e("JSON Parser", "Error parsing data " + e.toString());
         }
  
-        // return JSON Object
         return jarray;
- 
     }
 }

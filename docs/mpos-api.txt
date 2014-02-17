@@ -1,0 +1,13 @@
+{"getuserstatus":{"version":"1.0.0","runtime":39.390087127686,"data":{"username":"devzer0","shares":{"valid":220,"invalid":0},"hashrate":93.21,"sharerate":"0.04"}}}
+
+{"getdifficulty":{"version":"1.0.0","runtime":20.480871200562,"data":1228.35858938}}
+
+{"getpoolhashrate":{"version":"1.0.0","runtime":121.87600135803,"data":1753953}}
+
+{"gettimesincelastblock":{"version":"1.0.0","runtime":18.62096786499,"data":525}}
+
+{"getuserbalance":{"version":"1.0.0","runtime":18.228054046631,"data":{"confirmed":470.4200735,"unconfirmed":39.97169279,"orphaned":4.83465401}}}
+
+{"getuserhashrate":{"version":"1.0.0","runtime":19.352912902832,"data":98}}
+
+{"getpoolstatus":{"version":"1.0.0","runtime":22.9651927948,"data":{"pool_name":"suchcoins.com","hashrate":1683128,"efficiency":98.27,"workers":2562,"currentnetworkblock":104465,"nextnetworkblock":104466,"lastblock":104452,"networkdiff":1228.35858938,"esttime":3134.4971797438,"estshares":5031356.7821005,"timesincelast":666,"nethashrate":80321136297}}}
