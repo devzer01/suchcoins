@@ -30,7 +30,7 @@ public class MainActivity extends SherlockActivity {
 	
 	public static final String PREFS_NAME = "SuchCoinsPref";
 	
-	public static final String POOL_URL = "https://www.suchcoins.com/index.php?page=api&action=getpoolstatus&api_key=";
+	public static final String POOL_URL = "https://www.suchcoins.com/index.php?page=api&action=getuserstatus&api_key=";
 	
 	public String poolUrl; 
 	
